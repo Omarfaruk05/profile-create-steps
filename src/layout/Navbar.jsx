@@ -6,7 +6,8 @@ const Navbar = () => {
     <div>
       <div className="max-w-[1400px] mx-auto p-4">
         <div className="flex gap-4 justify-between items-center">
-          <div>
+          <h2 className="block lg:hidden text-3xl font-bold">Dribble</h2>
+          <div className="hidden lg:block">
             <ul className="flex gap-7 font-semibold justify-between items-center">
               <li className="text-3xl font-bold">Dribble</li>
               <li className="text-gray-600 hover:text-pink-600 cursor-pointer">
