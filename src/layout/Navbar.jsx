@@ -1,7 +1,17 @@
+import { Link } from "react-router-dom";
 import bagIcon from "../assets/bag.svg";
-import profileIcon from "../assets/profile.png";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  const [user, setUser] = useState({});
+  const data = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    setUser(data?.data);
+  }, [data]);
+  const handleLogOut = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+  };
   return (
     <div>
       <div className="max-w-[1400px] mx-auto p-4">
@@ -35,15 +45,33 @@ const Navbar = () => {
               name="search"
               id=""
             />
-            <img
-              className="pt-1 h-11 w-11 rounded-full bg-pink-200"
-              src={profileIcon}
-              alt=""
-            />
+            {user ? (
+              <img
+                className="p-1 h-12 w-12 rounded-full bg-pink-200"
+                src={user?.imageUrl}
+                alt=""
+              />
+            ) : (
+              <div className="pt-1 h-11 w-11 rounded-full bg-pink-200"></div>
+            )}
             <img className="h-8 w-8" src={bagIcon} alt="" />
-            <button className="cursor-pointer transition-all active:scale-95 bg-pink-500 text-white font-semibold px-4 py-2 rounded-md">
-              Upload
-            </button>
+            {user ? (
+              <button
+                onClick={handleLogOut}
+                className="cursor-pointer transition-all active:scale-95 bg-pink-500 text-white font-semibold px-4 py-2 rounded-md"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link to={"/signup"}>
+                <button
+                  onClick={handleLogOut}
+                  className="cursor-pointer transition-all active:scale-95 bg-green-700 text-white font-semibold px-4 py-2 rounded-md"
+                >
+                  Signup
+                </button>
+              </Link>
+            )}
           </div>
         </div>
       </div>
