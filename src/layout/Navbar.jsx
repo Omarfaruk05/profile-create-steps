@@ -1,16 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import bagIcon from "../assets/bag.svg";
-import { useEffect, useState } from "react";
 
 const Navbar = () => {
-  const [user, setUser] = useState({});
-  const data = JSON.parse(localStorage.getItem("user"));
-  useEffect(() => {
-    setUser(data?.data);
-  }, [data]);
+  const navigate = useNavigate();
+  const userInfo = JSON.parse(localStorage.getItem("user"));
+  const user = userInfo?.data;
+
   const handleLogOut = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+    navigate("/singup");
   };
   return (
     <div>
@@ -39,7 +38,7 @@ const Navbar = () => {
           </div>
           <div className="flex gap-4 justify-between items-center">
             <input
-              className="py-2 px-3 bg-gray-100 rounded-md focus:outline-pink-600"
+              className="hidden md:block selection:py-2 px-3 bg-gray-100 rounded-md focus:outline-pink-600"
               placeholder="Search"
               type="text"
               name="search"

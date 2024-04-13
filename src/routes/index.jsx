@@ -4,6 +4,7 @@ import App from "../App";
 import ImageUpload from "../pages/ImageUpload";
 import Category from "../pages/Category";
 import VerifyEmail from "../pages/VerifyEmail";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <App />,
+    element: (
+      <ProtectedRoute>
+        {" "}
+        <App />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "/",
