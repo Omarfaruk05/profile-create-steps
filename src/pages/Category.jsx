@@ -13,13 +13,16 @@ const Category = () => {
 
   const handleCategory = async (data) => {
     const { designer, recruiter, student } = data;
-
+    // make an array  for role
     const initialCategories = [designer, recruiter, student];
+
+    // take only truthy value from array
     const finalCategory = initialCategories.filter((category) => {
       if (category) {
         return category;
       }
     });
+
     const sendingData = { role: finalCategory };
     const token = localStorage.getItem("token");
 
@@ -34,9 +37,7 @@ const Category = () => {
         body: JSON.stringify(sendingData),
       }
     );
-
     const updatedUser = await res.json();
-    console.log(updatedUser);
     localStorage.setItem("user", JSON.stringify(updatedUser));
     reset();
     navigate("/");

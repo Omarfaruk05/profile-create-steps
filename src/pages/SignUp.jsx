@@ -1,15 +1,13 @@
 /* eslint-disable no-undef */
 import { useForm } from "react-hook-form";
 import signupBG from "../assets/signupbg.png";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const [user, setUser] = useState({});
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {}, []);
   const {
     register,
     formState: { errors },
@@ -17,11 +15,10 @@ const SignUp = () => {
     reset,
   } = useForm();
 
+  // submit user information to backend
   const onSubmit = async (data) => {
     delete data?.check;
     const stirngifyData = JSON.stringify(data);
-
-    console.log(stirngifyData);
     const res = await fetch(
       `https://create-user-backend.vercel.app/api/v1/users/signup`,
       {
@@ -34,9 +31,7 @@ const SignUp = () => {
     );
 
     const user = await res.json();
-    console.log(user);
     if (user?.status) {
-      setUser(user?.data?.user);
       localStorage.setItem("token", user?.data?.token);
       reset();
       navigate("/image-upload");
@@ -44,8 +39,6 @@ const SignUp = () => {
       setError(user?.error);
     }
   };
-
-  console.log(user);
   return (
     <div className="flex flex-wrap md:h-screen">
       <div className="hidden md:block md:w-2/5  lg:w-2/6 bg-[#f2d184] ">
@@ -80,6 +73,7 @@ const SignUp = () => {
               <li>{error}</li>
             </ul>
           )}
+
           <div className="max-w-[500px]">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="grid grid-cols-2 gap-3 flex-wrap my-7">

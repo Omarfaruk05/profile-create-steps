@@ -5,6 +5,7 @@ const VerifyEmail = () => {
     <div className="max-w-3xl mx-auto p-2 py-24 text-center space-y-5">
       <h1 className="text-5xl font-bold">Please verify your email...</h1>
       <div className="h-32 w-32 mx-auto flex justify-center items-center">
+        {/* mail logo  */}
         <img src={tickMail} alt="" />
       </div>
       <p className="text-gray-400">{`Please verify your email address. We've sent a confirmation email to:`}</p>

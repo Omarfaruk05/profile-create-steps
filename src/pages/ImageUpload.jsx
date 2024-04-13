@@ -16,8 +16,8 @@ const ImageUpload = () => {
     reset,
   } = useForm();
 
+  // upload image into imgBB
   const fileInputRef = useRef(null);
-
   const handleImage = (event) => {
     setProcessImage(true);
     event.preventDefault();
@@ -51,6 +51,7 @@ const ImageUpload = () => {
     fileInputRef.current.click();
   };
 
+  // submit image link and user bio to backend
   const onSubmit = async (data) => {
     const info = {
       imageUrl,
@@ -72,7 +73,6 @@ const ImageUpload = () => {
     );
 
     const updatedUser = await res.json();
-    console.log(updatedUser);
     localStorage.setItem("user", JSON.stringify(updatedUser));
     reset();
     navigate("/category");
@@ -91,6 +91,7 @@ const ImageUpload = () => {
           </p>
         </div>
         <div className="space-y-12">
+          {/* image upload section  */}
           <div>
             <h4 className="text-xl font-bold my-8">Add an avatar</h4>
             <div className="flex gap-12 justify-start items-center">
@@ -151,6 +152,7 @@ const ImageUpload = () => {
               </div>
             </div>
           </div>
+          {/* user bio form  */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               <h4 className="text-xl font-bold">Add your location</h4>
